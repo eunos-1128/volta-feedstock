@@ -12,8 +12,10 @@ source:
 
 build:
   script:
-    - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-    - cargo install --no-track --locked --root ${{ PREFIX }} --path .
+    interpreter: brush
+    content: |
+      cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+      cargo install --no-track --locked --root ${PREFIX} --path .
   number: 1
 
 requirements:
@@ -21,11 +23,21 @@ requirements:
     - ${{ compiler('rust') }}
     - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
+    - brush
     - cargo-bundle-licenses
 
 tests:
   - script:
-    - volta --version
+      interpreter: brush
+      content:
+        - if: win
+          then: |
+            export LOCALAPPDATA=${USERPROFILE}\AppData\Local
+            export APPDATA=${USERPROFILE}\AppData\Roaming
+        - volta --version
+    requirements:
+      run:
+        - brush
 
 about:
   homepage: https://volta.sh
