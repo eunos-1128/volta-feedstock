@@ -32,8 +32,8 @@ tests:
       content:
         - if: win
           then: |
-            export LOCALAPPDATA=${USERPROFILE}\AppData\Local
-            export APPDATA=${USERPROFILE}\AppData\Roaming
+            export LOCALAPPDATA=${USERPROFILE}/AppData/Local
+            export APPDATA=${USERPROFILE}/AppData/Roaming
         - volta --version
     requirements:
       run:
