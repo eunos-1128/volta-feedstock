@@ -28,16 +28,11 @@ requirements:
 
 tests:
   - script:
-      interpreter: brush
-      content:
-        - if: win
-          then: |
-            export LOCALAPPDATA=${USERPROFILE}/AppData/Local
-            export APPDATA=${USERPROFILE}/AppData/Roaming
-        - volta --version
-    requirements:
-      run:
-        - brush
+      - if: win
+        then: |
+          set "LOCALAPPDATA=%USERPROFILE%/AppData/Local"
+          set "APPDATA=%USERPROFILE%/AppData/Roaming"
+      - volta --version
 
 about:
   homepage: https://volta.sh
