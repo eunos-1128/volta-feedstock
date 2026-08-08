@@ -30,8 +30,10 @@ tests:
   - script:
       - if: win
         then: |
-          set "LOCALAPPDATA=%USERPROFILE%/AppData/Local"
-          set "APPDATA=%USERPROFILE%/AppData/Roaming"
+          set "LOCALAPPDATA=%USERPROFILE%\AppData\Local"
+          set "APPDATA=%USERPROFILE%\AppData\Roaming"
+          if not exist "%LOCALAPPDATA%" mkdir "%LOCALAPPDATA%"
+          if not exist "%APPDATA%" mkdir "%APPDATA%"
       - volta --version
 
 about:
