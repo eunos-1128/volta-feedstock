@@ -28,13 +28,17 @@ requirements:
 
 tests:
   - script:
-      - if: win
-        then: |
-          set "LOCALAPPDATA=%USERPROFILE%\AppData\Local"
-          set "APPDATA=%USERPROFILE%\AppData\Roaming"
-          if not exist "%LOCALAPPDATA%" mkdir "%LOCALAPPDATA%"
-          if not exist "%APPDATA%" mkdir "%APPDATA%"
-      - volta --version
+      interpreter: brush
+      content:
+        - if: win
+          then: |
+            export LOCALAPPDATA=${USERPROFILE}/AppData/Local
+            export APPDATA=${USERPROFILE}/AppData/Roaming
+            mkdir -p "${LOCALAPPDATA}" "${APPDATA}"
+        - volta --version
+    requirements:
+      run:
+        - brush
 
 about:
   homepage: https://volta.sh
